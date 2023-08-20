@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+html {
+    height: 100%;
+}
+.body-normal {
+    background: radial-gradient(ellipse, aquamarine, aquamarine,aqua, aqua, blue);
+    color: black;
+    min-height: 100%;
+    background-attachment: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.head-dark{
+    background: linear-gradient(to right, black, gray, black);
+    border: 3px solid black;
+}
+.menu-dark{
+    background: linear-gradient(black,gray,black);
+    border: 3px solid black;
+    width: 50px;
+    height: 100%;
+}
+.second{
+    background-color: rgba(0, 0, 255, 0.3);
+    border-radius: 20px;
+}
+.head-light{
+    background: linear-gradient(to right, blue, rgb(0, 255, 255), blue);
+    border: 3px solid blue;
+}
+.menu-light{
+    background: linear-gradient(blue,aqua,blue);
+    border: 3px solid blue;
+    width: 50px;
+    height: 100%;
+}
+.dark{
+    background: radial-gradient(ellipse, lightgray,lightgray,gray, gray, black);
+    color: white;
+}
+.dark-second{
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+h1 {
+    text-shadow:6px 6px 13px rgba(0,0,0,0.9);
+    font-family: Roboto, sans-serif;
+}
+.container-fluid {
+    padding-left: 50px;
+}
+h2 .input-h2{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.7);
+}
+p .input-p{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+}
+.edit{
+    width: 30px!important;
+    height: 30px!important;
+}
+.ubicacion0{
+    top: 0px;
+    right: 0px;
+}
+.ubicacion1{
+    right: 0px;
+    top: 32px!important;
+}
+.ubicacion2{
+    right: 0px;
+    top: 64px!important;
+}
+.size-icon{
+    font-size: 70px;
+    align-items: center;
+    margin: auto;
+}
+.add{
+    height: 200px;
+}
+input::placeholder, textarea::placeholder{
+    color: black;
+}
+.add:hover{
+    background-color: rgba(0, 0, 255, 0.5);
+    border-radius: 20px;    
+}
+i {
+    font-size: 30px;
+    color: black;
+}
+button>i{
+    font-size: 15px;
+    color: black;
+}
+button:hover{
+    background-color: rgba(0, 0, 255, 0.5);
+    border-radius: 20px;    
+}
+i.dark{
+    font-size: 30px;
+    color: white;
+}

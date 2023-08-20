@@ -1,0 +1,45 @@
+<div class="head-light container-fluid row col-12 d-flex flex-wrap align-content-center align-items-center justify-content-center m-0">
+    <h1 class="text-uppercase text-center p-1">{{titulo}}</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="d-flex row p-3 m-3 flex-wrap align-items-center justify-content-center align-content-center">
+        <div *ngFor="let element of experiencia;let indice=index" class="second col-12 m-2 p-2">
+            <div *ngIf="!opciones.edit" class="position-relative">
+                <h2>{{experiencia[indice].nombreEmpresa}}</h2>
+                <h3>{{experiencia[indice].puestoTrabajo}}</h3>
+                <h3>{{experiencia[indice].fechaInicio}}-{{experiencia[indice].fechaFin}}</h3>
+                <p>{{experiencia[indice].descripcion}}</p>
+                <button (click)="opciones.botonOpciones()" *ngIf="!opciones.edit" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
+                <div *ngIf="opciones.mostrar">
+                    <button *ngIf="!opciones.edit" (click)="opciones.botonEdit()" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
+                    <button *ngIf="opciones.edit" (click)="opciones.botonEdit()" class="edit ubicacion0 second p-0 m-2 position-absolute"><i class="bi bi-arrow-left"></i></button>
+                    <button [disabled]="this.formCarga.invalid" *ngIf="opciones.edit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+                </div>
+            </div>
+            <div *ngIf="opciones.edit" class="second col-12 p-3 m-3 position-relative">
+                <form [formGroup]="formCarga"(ngSubmit)="submitEdit(indice)">
+                    <input formControlName="nombreEmpresa" class="second text-center input-h2 m-2 p-2 col-12" type="text" [placeholder]="experiencia[indice].nombreEmpresa">
+                    <input formControlName="puestoTrabajo" class="second text-center input-h2 m-2 p-2 col-12" type="text" [placeholder]="experiencia[indice].puestoTrabajo">
+                    <input formControlName="fechaInicio" class="second text-center input-h2 m-0 p-2 col-6" type="text" [placeholder]="experiencia[indice].fechaInicio">
+                    <input formControlName="fechaFin" class="second text-center input-h2 m-0 p-2 col-6" type="text" [placeholder]="experiencia[indice].fechaFin">
+                    <input formControlName="descripcion" class="second text-center input-h2 m-2 p-2 col-12" type="text" [placeholder]="experiencia[indice].descripcion">
+                    <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonEdit()"><i class="bi bi-arrow-left"></i></button>
+                    <button [disabled]="this.formCarga.invalid" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+                </form>
+            </div>
+        </div>
+        <button *ngIf="!opciones.add" (click)="opciones.botonAdd()" class="add w p-3 m-0 second"><i class="bi-plus-circle size-icon"></i></button>
+        <div *ngIf="opciones.add" class="second position-relative">
+            <form [formGroup]="formCarga"(ngSubmit)="submitNew()">
+                <input formControlName="nombreEmpresa" class="second text-center input-h2 m-2 p-2 col-12" type="text">
+                <input formControlName="puestoTrabajo" class="second text-center input-h2 m-2 p-2 col-12" type="text">
+                <input formControlName="fechaInicio" class="second text-center input-h2 m-2 p-2 col-12" type="text">
+                <input formControlName="fechaFin" class="second text-center input-h2 m-2 p-2 col-12" type="text">
+                <input formControlName="descripcion" class="second text-center input-h2 m-2 p-2 col-12" type="text">
+                <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonAdd()"><i class="bi bi-arrow-left"></i></button>
+                <button class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+            </form>
+        </div>
+    </div>
+</div>

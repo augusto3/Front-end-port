@@ -1,0 +1,63 @@
+<div class="head-light container-fluid row col-12 d-flex flex-wrap align-content-center align-items-center justify-content-center m-0">
+    <h1 class="text-uppercase text-center p-1">{{titulo}}</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center" id="educacion">
+        <div class="second col-12 m-3 p-3 position-relative" *ngIf="!opciones.edit">
+            <h2>{{nameUniversidad}}</h2>
+            <p>{{nameCurso}}</p>
+            <p>{{fechaInicio}}-{{fechaFin}}</p>
+            <p>historial academico <a [href]="historialAcademico">aqui</a></p>
+            <button (click)="opciones.botonOpciones()" *ngIf="!opciones.edit" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
+            <div *ngIf="opciones.mostrar">
+                <button *ngIf="!opciones.edit" (click)="opciones.botonEdit()" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
+                <button *ngIf="opciones.edit" (click)="opciones.botonEdit()" class="edit ubicacion0 second p-0 m-2 position-absolute"><i class="bi bi-arrow-left"></i></button>
+                <button *ngIf="opciones.edit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+            </div>
+        </div>
+        <div class="position-relative second col-12 m-3 p-3" *ngIf="opciones.edit">
+            <form [formGroup]="formUniversidad"(ngSubmit)="submitEditU()">
+                <input formControlName="nameUniversidad" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="nameUniversidad">
+                <input formControlName="nameCursos" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="nameCurso" >
+                <input formControlName="fechaInicio" class="second input-h2 m-0 p-2 col-6" type="text" [placeholder]="fechaInicio">
+                <input formControlName="fechaFin" class="second input-h2 m-0 p-2 col-6" type="text" [placeholder]="fechaFin">
+                <input formControlName="historialAcademico" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="historialAcademico">
+                <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonAdd()"><i class="bi bi-arrow-left"></i></button>
+                <button class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+            </form>
+        </div>
+        <div *ngFor="let element of cursos;let indice=index" class="second col-12 m-2 p-2">
+            <div *ngIf="!opciones.edit" class="position-relative">
+                <h3>{{element.nameCurso}}</h3>
+                <p>Acceder al certificado del curso<a [href]="element.urlCertificado">Aqui</a></p>
+                <p>Acceder al contenido del curso<a [href]="element.urlCurso">Aqui</a></p>
+                <button (click)="opciones.botonOpciones()" *ngIf="!opciones.edit" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
+                <div *ngIf="opciones.mostrar">
+                    <button *ngIf="opciones.edit" (click)="opciones.botonEdit()" class="edit ubicacion0 second p-0 m-2 position-absolute"><i class="bi bi-arrow-left"></i></button>
+                    <button *ngIf="!opciones.edit" (click)="opciones.botonEdit()" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
+                    <button *ngIf="opciones.edit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+                </div>
+            </div>
+            <div class="position-relative" *ngIf="opciones.edit">
+                <form [formGroup]="formCurso"(ngSubmit)="submitEditC(indice)">
+                    <input formControlName="nameCurso" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="element.nameCurso">
+                    <input formControlName="urlCertificado" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="element.urlCertificado">
+                    <input formControlName="urlContenido" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="element.urlCurso">
+                    <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonEdit()"><i  class="bi bi-arrow-left"></i></button>
+                    <button class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+                </form>
+            </div>
+        </div>
+        <button *ngIf="!opciones.add" (click)="opciones.botonAdd()" class="add w p-3 m-0 second"><i class="bi-plus-circle size-icon"></i></button>
+        <div *ngIf="opciones.add" class="second m-2 p-2 position-relative d-flex flex-wrap">
+            <form [formGroup]="formCurso"(ngSubmit)="submitNewC()">
+                <input formControlName="nameCurso" type="text" class="col-12 input-h2 m-2 p-2 second" placeholder="titulo del curso"><br>
+                <input formControlName="urlCertificado" type="text" class="col-12 input-h2 m-2 p-2 second" placeholder="Certificado del curso"><br>
+                <input formControlName="urlContenido" type="text" class="col-12 input-h2 m-2 p-2 second" placeholder="Contenido del curso"><br>
+                <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonAdd()"><i class="bi bi-arrow-left"></i></button>
+                <button class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+            </form>
+        </div>
+    </div>
+</div>

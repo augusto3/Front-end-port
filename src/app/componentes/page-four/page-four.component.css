@@ -1,0 +1,29 @@
+.nombre{
+    top:0px;
+    left: 2%;
+    font-size: 20px;
+}
+.porcentaje{
+    top: 0px;
+    right: 2%;
+    font-size: 20px;
+}
+.barra{
+    top: 30px;
+    background-color: aquamarine;
+    border: 2px solid blue;
+    border-radius: 20px;
+    width: 100%;
+    height: 20px;
+}
+.relleno{
+    top: -2px;
+    background-color: blue;
+    border-radius:20px;
+    border: 2px solid blue;
+    height: 20px;
+    width: var(--wth);
+}
+.h{
+    height: 90px;
+}

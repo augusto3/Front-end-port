@@ -1,0 +1,19 @@
+.mover{
+    top:25%;
+}
+.second{
+    height: auto;
+    box-shadow: 0px 0px 20px 25px rgba(0, 204, 204, 0.76);
+}
+button,input {
+    padding-bottom: 0px;
+    background-color: lightgray;
+    color: black;
+    border-radius: 10px;
+}
+::placeholder {
+    color: black;
+}
+input:hover, button:hover {
+    background-color: grey;
+}

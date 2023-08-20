@@ -1,0 +1,25 @@
+<div class="head-light container-fluid row col-12 d-flex flex-wrap align-content-center align-items-center justify-content-center m-0">
+    <h1 class="text-uppercase text-center p-1">Sobre Mi</h1>
+</div>
+<div class="container-fluid">
+    <div *ngIf="!opciones.edit" class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center second position-relative">
+        <h2 class="text-center col-12">{{nombre}}</h2>
+        <h3 class="text-center col-12" >{{fechaDeNacimiento}}</h3>
+        <img class="size col-3 m-0 p-0" [src]="urlFoto" alt="mi perfil">
+        <p class="m-0 p-3 col-9">{{descripcion}}</p>
+        <button (click)="opciones.botonOpciones()" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
+        <div *ngIf="opciones.mostrar">
+            <button (click)="opciones.botonEdit()" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
+        </div>
+    </div>
+    <div *ngIf="opciones.edit" class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center second position-relative">
+        <form [formGroup]="formCarga" (ngSubmit)="submit()">
+            <input formControlName="nombre" class="text-center second input-h2 m-2 p-2 col-12 " type="text" [placeholder]="sobremi.nombre">
+            <input formControlName="fechaDeNacimiento" class="text-center second input-h2 m-2 p-2 col-12 " type="text" [placeholder]="sobremi.fechaDeNacimiento">
+            <input formControlName="urlFoto" class="text-center second input-h2 m-2 p-2 col-12 " type="text" [placeholder]="sobremi.urlFoto" >
+            <textarea formControlName="descripcion" class="text-center second input-p m-2 p-2 col-12" name="" id="" cols="30" rows="10"[placeholder]="sobremi.descripcion" ></textarea>
+            <button (click)="opciones.botonEdit()" class="edit second ubicacion0 p-0 m-2 position-absolute"><i class="bi bi-arrow-left p-0 m-0"></i></button>
+            <button type="submit" class=" position-absolute second edit p-0 m-2 ubicacion1"><i class="bi-check-lg"></i></button>
+        </form>
+    </div>
+</div>
