@@ -1,39 +1,35 @@
-<div class="head-light container-fluid row col-12 d-flex flex-wrap align-content-center align-items-center justify-content-center m-0">
-    <h1 class="text-uppercase text-center p-1">{{titulo}}</h1>
-</div>
+<app-head [titulo]="titulo"></app-head>
+<app-barra></app-barra>
 <div class="container-fluid">
-    <div class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center" id="educacion">
-        <div *ngFor="let element of proyectos;let indice=index" class="second position-relative col-12 m-3 p-3">
-            <div *ngIf="!opciones.edit">
-                <h2 class="text-center">{{element.nameProyectos}} </h2>
+    <div class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center" id="universidad">
+        <div *ngFor="let element of proyectos;let indice=index">
+            <div *ngIf="!opciones.edit && !opciones.add" class="second position-relative col-12 m-3 p-3">
+                <h2 class="text-center">{{element.nombreProyecto}} </h2>
                 <p>repositorio: <a [href]="element.urlProyectos">git</a></p>
                 <p class="p-3 m-0">{{element.descripcion}}</p>
+                <button *ngIf="!opciones.edit && opciones.admin" (click)="mostrar(indice)" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
+                <div *ngIf="opciones.mostrar && id==indice">
+                    <button *ngIf="!opciones.edit" (click)="edit(indice)" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
+                    <button *ngIf="!opciones.edit" (click)="eliminar(indice)" class="edit second ubicacion2 p-0 m-2 position-absolute"><i class="bi bi-trash"></i></button>
+                </div>
             </div>
-            <button (click)="opciones.botonOpciones()" *ngIf="!opciones.edit" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
-            <div *ngIf="opciones.mostrar">
-                <button *ngIf="!opciones.edit" (click)="opciones.botonEdit()" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
-                <button *ngIf="opciones.edit" (click)="opciones.botonEdit()" class="edit ubicacion0 second p-0 m-2 position-absolute"><i class="bi bi-arrow-left"></i></button>
-                <button *ngIf="opciones.edit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
-            </div>
-            <div *ngIf="opciones.edit">
-                <form [formGroup]="formCarga">
-                    <input formControlName="nameProyectos"class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="element.nameProyectos" >
-                    <input formControlName="urlProyectos" class="second input-h2 m-2 p-2 col-12" type="text" [placeholder]="element.urlProyectos">
-                    <textarea formControlName="descripcion" class="second col-12" name="text" id="text" cols="0" rows="5"[placeholder]="element.descripcion" ></textarea>
-                    <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonEdit()"><i  class="bi bi-arrow-left"></i></button>
-                    <button class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
-                </form>
-            </div>
+            <form [formGroup]="formCarga" (ngSubmit)="submitEdit(indice)" *ngIf="opciones.edit && !opciones.add && id==indice" class="flex-wrap d-flex align-items-center justify-content-center align-content-center position-relative second col-12 m-2 p-2">
+                <input formControlName="nombreProyecto"class="second input-h2 m-2 p-2 col-11" type="text" [placeholder]="element.nombreProyecto" >
+                <input formControlName="urlProyecto" class="second input-h2 m-2 p-2 col-11" type="text" [placeholder]="element.urlProyectos">
+                <textarea formControlName="descripcion" class="second col-11 m-2 p-2" name="text" id="text" cols="0" rows="5"[placeholder]="element.descripcion"></textarea>
+                <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonEdit()"><i  class="bi bi-arrow-left"></i></button>
+                <button type="submit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+            </form>
         </div>
-        <button *ngIf="!opciones.add" (click)="opciones.botonAdd()" class="add p-3 m-3 second"><i class="bi-plus-circle size-icon"></i></button>
-        <div *ngIf="opciones.add" class="p-2 m-2 flex-wrap d-flex align-items-center justify-content-center align-content-center second position-relative">
+        <button *ngIf="!opciones.add && opciones.admin && !opciones.edit" (click)="opciones.botonAdd()" class="add p-3 m-3 second"><i class="bi-plus-circle size-icon"></i></button>
+        <div *ngIf="opciones.add && !opciones.edit" class="p-2 m-2 flex-wrap d-flex align-items-center justify-content-center align-content-center second position-relative">
             <h2 class="col-12 text-center">Añadir nuevo proyecto:</h2>
-            <form [formGroup]="formCarga">
-                <input formControlName="nameProyectos" class="second text-center input-h2 m-2 p-2 col-12" type="text" placeholder="titulo"><br>
-                <input formControlName="urlProyectos" class="second text-center input-h2 m-2 p-2 col-12" type="text" placeholder="git"><br>
+            <form [formGroup]="formCarga" (ngSubmit)="submitNew()">
+                <input formControlName="nombreProyecto" class="second text-center input-h2 m-2 p-2 col-12" type="text" placeholder="titulo"><br>
+                <input formControlName="urlProyecto" class="second text-center input-h2 m-2 p-2 col-12" type="text" placeholder="git"><br>
                 <textarea formControlName="descripcion" class="second text-center m-2 p-2 col-12" name="text" id="text" cols="0" rows="5" placeholder="texto"></textarea>
                 <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonAdd()"><i class="bi bi-arrow-left"></i></button>
-                <button class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+                <button type="submit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
             </form>
         </div>
     </div>

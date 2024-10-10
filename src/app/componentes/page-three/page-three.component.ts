@@ -1,28 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { funcionPortfolio } from '../../function';
-import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-
-export interface Universidad{
-  id:number;
-  nameUniversidad:string;
-  nameCurso:string;
-  nameCarrera:string;
-  fechaInicio:Date;
-  fechaFin:Date;
-  historialAcademico:string;
-  educacion_id:number;
-  educacion_persona_id:number
-}
-
-export interface Cursos{
-  id:number;
-  nameCurso:string;
-  urlCurso:string;
-  urlCertificado:string;
-  educacion_id:number;
-  educacion_persona_id:number;
-}
+import { funcion } from '../../servicios/function';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Universidad } from 'src/app/model/Universidad';
+import { Cursos } from 'src/app/model/Cursos';
+import { FirebaseRDService } from 'src/app/servicios/firebase.rd.service';
 
 @Component({
   selector: 'app-page-three',
@@ -30,93 +11,94 @@ export interface Cursos{
   styleUrls: ['./page-three.component.css']
 })
 export class PageThreeComponent implements OnInit{
-  opciones=new funcionPortfolio;
+  opciones=new funcion;
   public titulo:String="Educacion";
-
   public universidad!:Universidad;
-  public nameUniversidad!:string;
-  public nameCurso!:string;
+  public nombreUniversidad!:string;
+  public nombreCarrera!:string;
   public fechaInicio!:Date;
   public fechaFin!:Date;
   public historialAcademico!:string;
-
   public cursos!:Cursos[];
+  public id:string='';
   public formUniversidad!:FormGroup;
   public formCurso!:FormGroup;
-
-  constructor(private datos:PortfolioService, private formBuilder :FormBuilder){
+  constructor(private formBuilder :FormBuilder,private fire:FirebaseRDService){
     this.buildForms();
+    this.fire.getDatos('universidad','universidad');
+    this.universidad=this.opciones.getDatos('universidad');
+    this.fire.getDatos('curso','curso');
+    this.cursos=this.opciones.getDatos('curso');
   }
-
   ngOnInit():void {
-    this.datos.Universidad().subscribe(Universidad=>{
-      this.universidad=Universidad[0];
-      this.nameUniversidad=this.universidad.nameUniversidad;
-      this.universidad.nameCurso="licenciatura en sistemas de informacion";
-      this.nameCurso=this.universidad.nameCurso;
+    this.inicializar();
+  }
+  inicializar(){
+    if(this.universidad!=null){
+      this.nombreUniversidad=this.universidad.nombreUniversidad;
+      this.nombreCarrera=this.universidad.nombreCarrera;
       this.fechaInicio=this.universidad.fechaInicio;
       this.fechaFin=this.universidad.fechaFin;
       this.historialAcademico=this.universidad.historialAcademico;
-    })
-    this.datos.Cursos().subscribe(Cursos=>{
-      this.cursos=Cursos;
-    })
+    }
   }
-
   buildForms(){
     this.formUniversidad =this.formBuilder.group({
-      nameUniversidad:[],
-      nameCurso:[],
+      nombreUniversidad:[],
+      nombreCarrera:[],
       fechaInicio:[],
       fechaFin:[],
       historialAcademico:[],    
     })
     this.formCurso=this.formBuilder.group({
-      nameCurso:[],
-      urlCurso:[],
+      nombreCurso:[],
+      urlContenido:[],
       urlCertificado:[],
     })
   }
-
+  mostrar(indice:string){
+    this.id=indice
+    this.opciones.botonOpciones()
+  }
+  edit(indice:string){
+    this.id=indice
+    this.opciones.botonEdit()
+  }
+  botonEdit(name:string){
+    this.id=name;
+    this.opciones.botonEdit();
+  }
   submitEditU(){
-    let form =this.formUniversidad.value;
-    if (form.nameUniversidad!=null){
-      this.universidad.nameUniversidad=form.nameUniversidad;
-    }
-    if (form.nameCursos!=null){
-      this.universidad.nameCarrera=form.nameCarrera;
-    }
+    var form =this.formUniversidad.value;
+    if (form.nombreUniversidad!=null){
+      this.universidad.nombreUniversidad=form.nombreUniversidad;}
+    if (form.nombreCarrera!=null){
+      this.universidad.nombreCarrera=form.nombreCarrera;}
     if (form.fechaInicio!=null){
-      this.universidad.fechaInicio=form.fechaInicio;
-    }
+      this.universidad.fechaInicio=form.fechaInicio;}
     if (form.fechaFin!=null){
-      this.universidad.fechaFin=form.fechaFin;
-    }
+      this.universidad.fechaFin=form.fechaFin;}
     if (form.historialAcademico!=null){
-      this.universidad.historialAcademico=form.historialAcademico;
-    }
-//    this.datos.setUniversidad(this.universidad);
+      this.universidad.historialAcademico=form.historialAcademico;}
+    this.fire.setDatos('universidad',this.universidad);
   }
-  submitNewU(){
-    let form =this.formUniversidad.value;
-//    this.datos.newUniversidad(form);
-  }
-
   submitEditC(indice:number){
-    let form =this.formCurso.value;
-    if (form.nameCurso!=null){
-      this.cursos[indice].nameCurso=form.nameCurso;
-    }
+    var form =this.formCurso.value;
+    if (form.nombreCurso!=null){
+      this.cursos[indice].nombreCurso=form.nombreCurso;}
     if (form.urlCurso!=null){
-      this.cursos[indice].urlCurso=form.urlCurso;
-    }
+      this.cursos[indice].urlContenido=form.urlContenido;}
     if (form.urlCertificado!=null){
-      this.cursos[indice].urlCertificado=form.urlCertificado;
-    }
-//    this.datos.setCursos(this.cursos);
+      this.cursos[indice].urlCertificado=form.urlCertificado;}
+    this.fire.setDatos('cursos',this.cursos);
   }
   submitNewC(){
-    let form =this.formCurso.value;
-//    this.datos.newCursos(form);
+    this.cursos.push(this.formCurso.value);
+    this.fire.setDatos('curso',this.cursos);
   }
+  eliminar(indice:number){
+    this.cursos.splice(indice,1);
+    this.fire.setDatos('misHabilidades',this.cursos);
+  }  
+
 }

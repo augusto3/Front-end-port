@@ -1,36 +1,39 @@
-import { PortfolioService,} from 'src/app/servicios/portfolio.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { Router } from '@angular/router';
+import { FirebaseAuth } from 'src/app/servicios/firebaseAuth.service';
+import { LoginCredentials } from 'src/app/model/login-credentials.interface';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit{
-  form!:FormGroup;
+  formCarga!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private autenticacion: AutenticacionService, private ruta:Router){
-    this.form=this.formBuilder.group(
-      {
-        user:["",[Validators.required,]],
-        password:["",[Validators.required,Validators.minLength(4)]],
-    })
+  constructor(private formBuilder:FormBuilder,private ruta:Router,private fire:FirebaseAuth){
+  this.buildForms();
   }
-
-  ngOnInit(): void {
+  buildForms(){
+  this.formCarga=this.formBuilder.group({
+    email:["",[Validators.required,Validators.email]],
+    password:["",[Validators.required,Validators.minLength(7)]],})
   }
-  public get Username(){
-    return this.form.get('user')
+  ngOnInit(): void {}
+  public get Email(){
+    return this.formCarga.get('email');
   }
   public get Password(){
-    return this.form.get('password')
+    return this.formCarga.get('password');
   }
   public onEnviar(event:Event){
     event.preventDefault;
-    this.autenticacion.iniciarSesion({"nombreUsuario":this.Username?.value,"password":this.Password?.value}).subscribe(data=>{
-      this.ruta.navigate(['/sobremi'])
+    let form=this.formCarga.value;
+    if (form){
+      this.fire.loginUp(form).then(dato=>{
+        sessionStorage.setItem('UID',dato.user.uid);
+      })
     }
-  )}
+    this.ruta.navigate(['/sobremi']);}
 }

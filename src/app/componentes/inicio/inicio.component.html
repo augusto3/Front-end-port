@@ -1,14 +1,15 @@
+<app-barra></app-barra>
 <div class="d-flex row flex-wrap centrar text-center p-0 m-auto justify-content-center">
     <div class="second p-2 m-0 col-8 position-absolute mover">
         <h1 class="center">iniciar sesion</h1>
-        <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
-            <input formControlName="user" [ngClass]="{'is-invalid':Username?.errors && Username?.touched,'is-valid':!Username?.errors && !Username?.touched}" class="text-center col-6 border-3 border-dark p-1 m-2 icon-user" type="text" name="usuario" placeholder="usuario" required="true"><br>
-            <div *ngIf="Username?.errors && Username?.touched " > 
-            <p *ngIf="Username?.hasError('required')"class="text-center row col-6 p-0 m-auto">
+        <form (ngSubmit)="onEnviar($event)" [formGroup]="formCarga">
+            <input formControlName="email" [ngClass]="{'is-invalid':Email?.errors && Email?.touched,'is-valid':!Email?.errors && !Email?.touched}" class="text-center col-6 border-3 border-dark p-1 m-2 icon-user" type="text" name="usuario" placeholder="usuario" required="true"><br>
+            <div *ngIf="Email?.errors && Email?.touched " > 
+            <p *ngIf="Email?.hasError('required')"class="text-center row col-6 p-0 m-auto">
                 El username es requerido
             </p>
             </div>
-            <input formControlName="password" [ngClass]="{'is-invalid':Password?.errors && Password?.touched,'is-valid':!Password?.errors && !Password?.touched}" class="text-center col-6 border-1 border-dark p-1 m-2 icon-lock" type="password" placeholder="Contraseña" name="password" required="true"><br>
+            <input formControlName="password" [ngClass]="{'is-invalid':Password?.errors && Password?.touched,'is-valid':!Password?.errors && !Password?.touched}" class="text-center col-6 border-1 border-dark p-1 m-2 icon-lock" type="password" placeholder="Contraseña" name="password" required="true" autocomplete="on"><br>
             <div *ngIf="Password?.errors && Password?.touched " > 
                 <p *ngIf="Password?.hasError('required')"class="text-center row col-6 p-0 m-auto">
                     La contraseña es requerido

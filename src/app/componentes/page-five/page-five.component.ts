@@ -1,47 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { funcionPortfolio } from '../../function';
-import { FormBuilder, FormGroup,FormControl,Validators } from '@angular/forms';
-
-export interface Proyectos {
-  id:number;
-  nameProyectos:string;
-  urlProyectos:string;
-  descripcion:string;
-  personajes_id:number;
-}
+import { Component} from '@angular/core';
+import { funcion } from '../../servicios/function';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Proyectos } from 'src/app/model/Proyectos';
+import { FirebaseRDService } from 'src/app/servicios/firebase.rd.service';
 
 @Component({
   selector: 'app-page-five',
   templateUrl: './page-five.component.html',
   styleUrls: ['./page-five.component.css']
 })
-export class PageFiveComponent implements OnInit{
-  opciones= new funcionPortfolio;
-  proyectos!:Proyectos[];
-  titulo:string="Proyectos";
+export class PageFiveComponent{
+  opciones= new funcion;
+  public proyectos!:Proyectos[];
+  public titulo:string="Proyectos";
+  public id:number=0;
   formCarga!:FormGroup;
-  constructor(private datos:PortfolioService, private formBuilder:FormBuilder){
+  constructor( private formBuilder:FormBuilder,private fire:FirebaseRDService){
     this.buildForms();
+    this.fire.getDatos('proyectos','proyectos');
+    this.proyectos=this.opciones.getDatos('proyectos');
   }
-
-  ngOnInit():void {
-    this.datos.Proyectos().subscribe(Proyectos=>{
-      this.proyectos=Proyectos;
-    })  
-  }
-
   buildForms(){
     this.formCarga =this.formBuilder.group({
-      nameProyectos:[],
-      urlProyectos:[],
-      descripcion:[]
+      nombreProyecto:[],
+      urlProyecto:[],
+      descripcion:[],
     })
   }
+  mostrar(indice:number){
+    this.id=indice;
+    this.opciones.botonOpciones();
+  }
+  edit(indice:number){
+    this.id=indice;
+    this.opciones.botonEdit();
+  }
   submitEdit(indice:number){
-    let form =this.formCarga.value;
-    if (form.nameProyectos!=null){
-      this.proyectos[indice].nameProyectos=form.nameProyectos;
+    var form =this.formCarga.value;
+    if (form.nombreProyectos!=null){
+      this.proyectos[indice].nombreProyecto=form.nombreProyecto;
     }
     if (form.urlProyectos!=null){
       this.proyectos[indice].urlProyectos=form.urlProyectos;
@@ -49,10 +46,14 @@ export class PageFiveComponent implements OnInit{
     if (form.descripcion!=null){
       this.proyectos[indice].descripcion=form.descripcion;
     }
-//    this.datos.setProyectos(this.proyectos[indice]);
+    this.fire.setDatos('proyectos',this.proyectos)
   }
   submitNew(){
-    let form =this.formCarga.value;
-//    this.datosPortafolio.newProyectos(form);
+    this.proyectos.push(this.formCarga.value);
+    this.fire.setDatos('proyectos',this.proyectos);
   }
+  eliminar(indice:number){
+    this.proyectos.splice(indice,1);
+    this.fire.setDatos('proyectos',this.proyectos);
+  }  
 }

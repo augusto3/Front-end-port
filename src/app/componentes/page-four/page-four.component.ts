@@ -1,32 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { funcionPortfolio } from '../../function';
-import { FormBuilder,FormControl,Validators,FormGroup } from '@angular/forms';
-
-export interface Habilidades{
-  id:number;
-  lenguaje:string;
-  porcentaje:number;
-  persona_id:number;
-}
+import { Component} from '@angular/core';
+import { funcion } from '../../servicios/function';
+import { FormBuilder,FormGroup } from '@angular/forms';
+import { Habilidades } from 'src/app/model/Habilidades';
+import { FirebaseRDService } from 'src/app/servicios/firebase.rd.service';
 @Component({
   selector: 'app-page-four',
   templateUrl: './page-four.component.html',
   styleUrls: ['./page-four.component.css']
 })
-export class PageFourComponent implements OnInit{
-  opciones= new funcionPortfolio;
-  habilidades!:Habilidades[];
+export class PageFourComponent{
+  opciones= new funcion;
+  public habilidades!:Habilidades[];
   formCarga!:FormGroup;
-  titulo:string="Mis Habilidades";
-  constructor(private datos:PortfolioService, private formBuilder:FormBuilder){
+  public titulo:string="Mis Habilidades";
+  public id:number=0;
+  constructor(private formBuilder:FormBuilder,private fire:FirebaseRDService){
     this.buildForms();
-  }
-
-  ngOnInit():void {
-    this.datos.Habilidades().subscribe(Habilidad=>{
-      this.habilidades=Habilidad;
-    })
+    this.fire.getDatos('misHabilidades','habilidades');
+    this.habilidades=this.opciones.getDatos('habilidades');
   }
   buildForms(){
     this.formCarga =this.formBuilder.group({
@@ -34,20 +25,32 @@ export class PageFourComponent implements OnInit{
       porcentaje:[],
     })
   }
-  submitEditC(indice:number){
-    let form =this.formCarga.value;
+  mostrar(indice:number){
+    this.id=indice
+    this.opciones.botonOpciones()
+  }
+  edit(indice:number){
+    this.id=indice;
+    this.opciones.botonEdit();
+  }
+  submitEdit(indice:number){
+    var form =this.formCarga.value;
     if (form.lenguaje!=null){
       this.habilidades[indice].lenguaje=form.lenguaje;
     }
     if (form.porcentaje!=null){
       this.habilidades[indice].porcentaje=form.porcentaje;
     }
-//    this.datos.setMisHabilidades(this.habilidades[indice]);
+    this.fire.setDatos('misHabilidades',this.habilidades);
   }
-  submitNewC(){
-    let form =this.formCarga.value;
-//    this.datos.newMisHabilidades(form);
+  submitNew(){
+    this.habilidades.push(this.formCarga.value);
+    this.fire.setDatos('misHabilidades',this.habilidades);
   }
+  eliminar(indice:number){
+    this.habilidades.splice(indice,1);
+    this.fire.setDatos('misHabilidades',this.habilidades);
+  }  
   dataStyle(indice:number):string{
     return '--wth: '+ this.habilidades[indice].porcentaje + '%'
   }

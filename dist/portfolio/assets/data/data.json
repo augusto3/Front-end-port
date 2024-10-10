@@ -1,41 +1,41 @@
 {
-    "redesSociales":{
+    "Redes":{
         "facebook":"https://www.facebook.com/augustoosca",
         "linkedin":"https://www.linkedin.com/in/augusto-gervasoni-18612a191/",
         "instagram":"https://www.instagram.com/augusto1.ger/"
     },
-    "sobreMi":{
+    "SobreMi":{
         "nombre":"Augusto Gervasoni",
         "fechaDeNacimiento":"10/04/2001",
         "urlFoto":"/assets/img/cat.jpg",
         "descripcion":"Soy un Full Stack Developer Jr"
         },
-    "experiencia":{
+    "Experiencia":{
         "nombreEmpresa":"",
         "puestoTrabajo":"",
         "fechaInicio":"",
         "fechaFin":"",
         "descripcion":""
         },
-    "educacion":{
-        "universidad":{
-            "nameUniversidad":"Universidad Autonoma de Entre Rios (UADER)",
-            "nameCarrera":"Licenciatura en Sistemas de Información",
-            "fechaInicio":"2020",
-            "fechaFin":"actualidad",
-            "historialAcademico":"/assets/pdf/historia_academica.pdf"
+    "Educacion":{},
+    "Universidad":{
+        "nameUniversidad":"Universidad Autonoma de Entre Rios (UADER)",
+        "nameCarrera":"Licenciatura en Sistemas de Información",
+        "fechaInicio":"2020",
+        "fechaFin":"actualidad",
+        "historialAcademico":"/assets/pdf/historia_academica.pdf"
         },
-        "curso":[{
-            "nameCurso":"Universidad HTML - Aprende HTML desde Cero hasta Experto",
-            "urlCertificado":"/assets/pdf/Universidad HTML - Aprende HTML desde Cero hasta Experto.pdf",
-            "urlContenido":"https://www.udemy.com/course/universidad-html-aprende-html-desde-cero-hasta-experto-css-html5"
+    "Cursos":[{
+        "nameCurso":"Universidad HTML - Aprende HTML desde Cero hasta Experto",
+        "urlCertificado":"/assets/pdf/Universidad HTML - Aprende HTML desde Cero hasta Experto.pdf",
+        "urlContenido":"https://www.udemy.com/course/universidad-html-aprende-html-desde-cero-hasta-experto-css-html5"
         },
         {
-            "nameCurso":"Universidad CSS - Aprende CSS desde Cero hasta Experto",
-            "urlCertificado":"/assets/pdf/Universidad CSS - Aprende CSS desde Cero hasta Experto.pdf",
-            "urlContenido":"https://www.udemy.com/course/universidad-css-aprende-css-desde-cero-flexbox-responsive-web-desing"
-        }]},
-    "misHabilidades":[{
+        "nameCurso":"Universidad CSS - Aprende CSS desde Cero hasta Experto",
+        "urlCertificado":"/assets/pdf/Universidad CSS - Aprende CSS desde Cero hasta Experto.pdf",
+        "urlContenido":"https://www.udemy.com/course/universidad-css-aprende-css-desde-cero-flexbox-responsive-web-desing"
+        }],
+    "MisHabilidades":[{
         "lenguaje":"HTML5",
         "porcentaje":100
         },
@@ -59,7 +59,7 @@
         "lenguaje":"python",
         "porcentaje":70
         }],
-    "proyectos":[{
+    "Proyectos":[{
         "nameProyectos":"practica algoritmos python",
         "urlProyectos":"",
         "descripcion":""

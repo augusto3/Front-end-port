@@ -1,0 +1,7 @@
+{
+"/api/*":{
+    "target":"https://portfolio43.onrender.com",
+    "secure":false,
+    "logLevel":"default"
+    }
+}

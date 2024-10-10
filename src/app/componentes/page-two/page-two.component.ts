@@ -1,66 +1,86 @@
-import { Component, OnInit } from '@angular/core';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { funcionPortfolio } from '../../function';
-import { FormGroup, FormBuilder, FormControl, Validator } from '@angular/forms';
-
-export interface Experiencia{
-  id:number;
-  nombreEmpresa:string;
-  puestoTrabajo:string;
-  fechaInicio:Date;
-  fechaFin:Date;
-  descripcion:string;
-  persona_id:number;
-}
+import { Component} from '@angular/core';
+import { funcion} from '../../servicios/function';
+import { FormGroup, FormBuilder} from '@angular/forms';
+import { Experiencia } from 'src/app/model/Experiencia';
+import { FirebaseRDService } from 'src/app/servicios/firebase.rd.service';
 @Component({
   selector: 'app-page-two',
   templateUrl: './page-two.component.html',
   styleUrls: ['./page-two.component.css']
 })
-export class PageTwoComponent implements OnInit{
-  public opciones= new funcionPortfolio;
+export class PageTwoComponent{
+  public opciones=new funcion;
   public titulo:string="Experiencia";
-  public experiencia!:Experiencia[];
+  public experiencia:Experiencia;
   public formCarga!:FormGroup;
- 
-  constructor(private datosPortafolio:PortfolioService, private formBuilder :FormBuilder){
+  public nombreEmpresa:string="";
+  public puestoTrabajo:string="";
+  public fechaInicio:String="";
+  public fechaFin:String="";
+  public descripcion:string="";
+  constructor(private formBuilder :FormBuilder,private fire:FirebaseRDService){
     this.buildForms();
+    this.fire.getDatos('experiencia','experiencia');
+    this.experiencia=this.opciones.getDatos('experiencia');
+    this.inicializar()
   }
-  ngOnInit():void{
-    this.datosPortafolio.Experiencia().subscribe(Experiencia=>{
-      this.experiencia=Experiencia;
-    })
+  inicializar(){
+    if(this.experiencia!=undefined){
+      this.nombreEmpresa=this.experiencia.nombreEmpresa;
+      this.puestoTrabajo=this.experiencia.puestoTrabajo;
+      this.fechaInicio=this.experiencia.fechaInicio;
+      this.fechaFin=this.experiencia.fechaFin;
+      this.descripcion=this.experiencia.descripcion;
+    }
   }
   buildForms(){
     this.formCarga =this.formBuilder.group({
-      nombreEmpresa:[],
-      puestoTrabajo:[],
-      fechaInicio:[],
-      fechaFin:[],
-      descripcion:[],
-    })}
-
+      nombreEmpresa:[]="",
+      puestoTrabajo:[]="",
+      fechaInicio:[]="",
+      fechaFin:[]="",
+      descripcion:[]="",
+    }
+  )}
+  mostrar(){
+    this.opciones.botonOpciones();
+  }
+  edit(){
+    this.opciones.botonEdit();
+  }
   submitEdit(indice:number){
-    let form =this.formCarga.value;
-    if (form.nombreEmpresa!=null){
-      this.experiencia[indice].nombreEmpresa=form.nombreEmpresa;
+    let form:Experiencia =this.formCarga.value;
+    console.log(form.nombreEmpresa);
+    if (form.nombreEmpresa!=""){
+      this.experiencia.nombreEmpresa=form.nombreEmpresa;
     }
-    if (form.puestoTrabajo!=null){
-      this.experiencia[indice].puestoTrabajo=form.puestoTrabajo;
+    if (form.puestoTrabajo!=""){
+      this.experiencia.puestoTrabajo=form.puestoTrabajo;
     }
-    if (form.fechaInicio!=null){
-      this.experiencia[indice].fechaInicio=form.fechaInicio;
+    if (form.fechaInicio!=""){
+      this.experiencia.fechaInicio=form.fechaInicio;
     }
-    if (form.fechaFin!=null){
-      this.experiencia[indice].fechaFin=form.fechaFin;
+    if (form.fechaFin!=""){
+      this.experiencia.fechaFin=form.fechaFin;
     }
-    if (form.descripcion!=null){
-      this.experiencia[indice].descripcion=form.descripcion;
-    }
-//    this.datos.setExperiencia(this.experiencia);
+    if (form.descripcion!=""){
+      this.experiencia.descripcion=form.descripcion;}
+      console.log(this.experiencia);
+    //      this.fire.setDatos('experiencia',this.experiencia);
   }
-  submitNew(){
-    let form =this.formCarga.value;
-//    this.datosPortafolio.newExperiencia(form);
+  eliminar(indice:number){}
+  submitNew(){}
+
+  /*  submitNew(){
+    if (this.experiencia!=null){
+      this.experiencia.push(this.formCarga.value);
+      this.fire.setDatos('experiencia',this.experiencia);
+    }else{
+      this.fire.setDatos('experiencia',this.formCarga.value);
+    }
   }
+  eliminar(indice:number){
+    this.experiencia.splice(indice,1);
+    this.fire.setDatos('experiencia',this.experiencia);
+  }*/
 }
