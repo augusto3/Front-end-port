@@ -1,38 +1,28 @@
-<app-head [titulo]="titulo"></app-head>
-<app-barra></app-barra>
-
-<div class="container-fluid">
-  <div class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center" id="misHabilidades">
-    <div *ngFor="let element of habilidades;let indice=index" >
-      <div *ngIf="!opciones.edit && !opciones.add" class="position-relative second col-12 m-3 p-2">
-        <p class="position-absolute nombre">{{element.lenguaje}}</p>
-        <p class="position-absolute porcentaje">{{element.porcentaje}}%</p>
-        <br><br>
-        <div class="barra position-absolute">
-          <div [style]="dataStyle(indice)" class="position-absolute relleno"></div>
-        </div>
-        <button *ngIf="!opciones.edit && opciones.admin" (click)="mostrar(indice)" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
-        <div *ngIf="opciones.mostrar && id==indice">
-            <button *ngIf="!opciones.edit" (click)="edit(indice)" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
-            <button *ngIf="!opciones.edit" (click)="eliminar(indice)" class="edit second ubicacion2 p-0 m-2 position-absolute"><i class="bi bi-trash"></i></button>
-        </div>
+<div class="container-fluid col-12 d-flex flex-wrap row p-0 m-0 justify-content-center">
+  <div *ngFor="let element of habilidades;let indice=index" class="position-relative size">
+    <div *ngIf="!opciones.edit && !opciones.add" class="p-3 m-3">
+      <img loading="lazy" *ngIf="element.icono" [src]="element.icono">
+      <button *ngIf="!opciones.edit && opciones.admin" (click)="mostrar(indice)" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
+      <div *ngIf="opciones.mostrar && id==indice">
+          <button *ngIf="!opciones.edit" (click)="edit(indice)" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
+          <button *ngIf="!opciones.edit" (click)="eliminar(indice)" class="edit second ubicacion2 p-0 m-2 position-absolute"><i class="bi bi-trash"></i></button>
       </div>
-        <form [formGroup]="formCarga" (ngSubmit)="submitEdit(indice)" *ngIf="opciones.edit && id==indice && !opciones.add" class="flex-wrap d-flex align-items-center justify-content-center align-content-center position-relative second">
-          <input formControlName="lenguaje" class="second text-center input-h2 m-2 p-2 col-10" type="text"[placeholder]="element.lenguaje"><br>
-          <input formControlName="porcentaje" class="second text-center input-h2 m-2 p-2 col-10" type="text"[placeholder]="element.porcentaje"><br>
-          <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonEdit()"><i class="bi bi-arrow-left"></i></button>
-          <button type="submit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
-        </form>
     </div>
-    <button *ngIf="!opciones.add && opciones.admin && !opciones.edit" (click)="opciones.botonAdd()" class="add p-3 m-3 second"><i class="bi-plus-circle size-icon"></i></button>
-    <div *ngIf="opciones.add && !opciones.edit" class="p-2 m-2 flex-wrap d-flex align-items-center justify-content-center align-content-center second position-relative">
-      <h2 class="col-12 text-center">Añadir nuevo lenguaje de programacion:</h2>
-      <form [formGroup]="formCarga" (ngSubmit)="submitNew()">
-        <input formControlName="lenguaje" class="second text-center input-h2 m-2 p-2 col-10" type="text" placeholder="lenguaje:"><br>
-        <input formControlName="porcentaje" class="second text-center input-h2 m-2 p-2 col-10" type="text" placeholder="porcentaje:"><br>
-        <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonAdd()"><i class="bi bi-arrow-left"></i></button>
-        <button type="submit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
-      </form>
-    </div>
+    <form [formGroup]="formCarga" (ngSubmit)="submitEdit(indice)" *ngIf="opciones.edit && id==indice && !opciones.add" class="flex-wrap d-flex align-items-center justify-content-center align-content-center position-relative second">
+      <input formControlName="lenguaje" class="second text-center input-h2 m-2 p-2 col-10" type="text"[placeholder]="element.lenguaje"><br>
+      <input formControlName="icono" class="second text-center input-h2 m-2 p-2 col-10" type="text"[placeholder]="element.icono"><br>
+      <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonEdit()"><i class="bi bi-arrow-left"></i></button>
+      <button type="submit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+    </form>
+  </div>
+  <button *ngIf="!opciones.add && opciones.admin && !opciones.edit" (click)="opciones.botonAdd()" class="add p-1 second m-3"><i class="bi-plus-circle size-icon"></i></button>
+  <div *ngIf="opciones.add && !opciones.edit" class="p-2 m-2 flex-wrap d-flex align-items-center justify-content-center align-content-center second position-relative">
+    <h2 class="col-12 text-center">Añadir nuevo lenguaje de programacion:</h2>
+    <form [formGroup]="formCarga" (ngSubmit)="submitNew()">
+      <input formControlName="lenguaje" class="second text-center input-h2 m-2 p-2 col-10" type="text" placeholder="lenguaje:"><br>
+      <input formControlName="icono" class="second text-center input-h2 m-2 p-2 col-10" type="text" placeholder="icono:"><br>
+      <button class="edit ubicacion0 second p-0 m-2 position-absolute" (click)="opciones.botonAdd()"><i class="bi bi-arrow-left"></i></button>
+      <button type="submit" class="edit ubicacion1 second  p-0 m-2 position-absolute"><i class="bi-check-lg"></i></button>
+    </form>
   </div>
 </div>

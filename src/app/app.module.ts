@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +8,6 @@ import { PageTwoComponent } from './componentes/page-two/page-two.component';
 import { PageThreeComponent } from './componentes/page-three/page-three.component';
 import { PageFourComponent } from './componentes/page-four/page-four.component';
 import { PageFiveComponent } from './componentes/page-five/page-five.component';
-import { PageSixComponent } from './componentes/page-six/page-six.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -25,7 +23,6 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
     PageThreeComponent,
     PageFourComponent,
     PageFiveComponent,
-    PageSixComponent,
     BarraComponent,
     HeadComponent,
     InicioComponent

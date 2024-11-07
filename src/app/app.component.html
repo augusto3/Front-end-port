@@ -1,1 +1,31 @@
-<router-outlet></router-outlet>
+<app-barra [titulo]="titulo"></app-barra>
+<header class="d-block position-sticky top-0">
+    <app-head [titulo]="titulo"></app-head>
+    <button *ngIf="!opciones.admin" (click)="inicio()" class="boton-inicio p-0 m-2 position-absolute ubicacion0">log in</button>
+    <button *ngIf="opciones.admin" (click)="cerrar()" class="boton-inicio p-0 m-2 position-absolute ubicacion0">log out</button>
+</header>
+<section *ngIf="!confirm()">
+    <h2 id="sobremi" #sobremi class="text-center text-uppercase" style="padding: 20px;">                </h2>
+    <div>
+        <app-page-one></app-page-one>
+    </div>
+    <h2 id="experiencia" #experiencia class="text-center text-uppercase">experiencia</h2>
+    <div>
+        <app-page-two></app-page-two>
+    </div>
+    <h2 id="educacion" #educacion class="text-center text-uppercase">educacion</h2>
+    <div>
+        <app-page-three></app-page-three>
+    </div>
+    <h2 id="habilidades" #habilidades class="text-center text-uppercase">habilidades</h2>
+    <div>
+        <app-page-four></app-page-four>
+    </div>
+    <h2 id="proyectos" #proyectos class="text-center text-uppercase">proyectos</h2>
+    <div>
+        <app-page-five></app-page-five>
+    </div>
+</section>
+<section *ngIf="confirm()" id="inicio">
+    <app-inicio></app-inicio>
+</section>

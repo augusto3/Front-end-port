@@ -1,4 +1,4 @@
 export interface Habilidades{
-    lenguaje:string;
-    porcentaje:number;
-  }
+  lenguaje:string;
+  icono:string;
+}

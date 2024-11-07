@@ -3,27 +3,26 @@
     left: 2%;
     font-size: 20px;
 }
+.mar-tb{
+    margin: 18px 0px;
+    padding:15px 25px;
+}
 .porcentaje{
     top: 0px;
     right: 4%;
     font-size: 20px;
 }
-.barra{
-    top: 30px;
-    background-color: aquamarine;
-    border: 2px solid blue;
-    border-radius: 20px;
-    width: 94%;
-    height: 20px;
-}
-.relleno{
-    top: -2px;
-    background-color: blue;
-    border-radius:20px;
-    border: 2px solid blue;
-    height: 20px;
-    width: var(--wth);
+.margin-20p{
+    margin: 20px;
 }
 .h{
     height: 90px;
+}
+img{
+    width: 150px;
+    height: 150px;
+}
+.size{
+    width: 220px;
+    height: 220px;
 }

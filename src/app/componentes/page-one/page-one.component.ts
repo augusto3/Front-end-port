@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { funcion} from '../../servicios/function';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { FirebaseRDService } from 'src/app/servicios/firebase.rd.service';
@@ -10,7 +10,7 @@ import { SobreMi } from 'src/app/model/SobreMi';
   styleUrls: ['./page-one.component.css']
 })
 
-export class PageOneComponent{
+export class PageOneComponent implements OnInit{
   public opciones= new funcion;
   public titulo:string="sobre mi";
   public sobremi!:SobreMi;
@@ -21,16 +21,23 @@ export class PageOneComponent{
   formCarga!: FormGroup;
   constructor(private formBuilder: FormBuilder,private fire:FirebaseRDService ){
     this.buildForms();
-    this.fire.getDatos('sobreMi','sobre');
-    this.sobremi=this.opciones.getDatos('sobre');
+  }
+  ngOnInit(): void {
+    this.fire.getDatos('sobreMi')
+      .then((snapshot) => {
+         this.sobremi=snapshot.val()
     this.inicializar();
+    })
+    .catch((error) => {
+      console.error(error.code+'|'+error.message);
+    });
   }
   inicializar(){
     if (this.sobremi!=null){
+      this.urlFoto=this.sobremi.urlFoto;
       this.nombre=this.sobremi.nombre;
       this.descripcion=this.sobremi.descripcion;
       this.edad=this.sobremi.edad;
-      this.urlFoto=this.sobremi.urlFoto;
     }
   }
   buildForms(){
@@ -51,7 +58,6 @@ export class PageOneComponent{
       this.sobremi.edad=form.edad;}
     if (form.descripcion!=null){
       this.sobremi.descripcion=form.descripcion;}
-    this.opciones.setDatos('sobre',this.sobremi);
     this.fire.setDatos('sobreMi',this.sobremi);
   }
 }

@@ -1,13 +1,10 @@
-<app-head [titulo]="titulo"></app-head>
-<app-barra></app-barra>
-
-<div class="container-fluid">
-    <div class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center" id="educacion">
-        <div class="second col-12 m-3 p-3 position-relative" *ngIf="!opciones.edit && !opciones.add">
+<div class="container-fluid p-3 m-0">
+    <div class="d-flex row flex-wrap align-items-center justify-content-center align-content-center col-12 p-3 m-0">
+        <div class="col-12 m-3 p-3 second position-relative" *ngIf="!opciones.edit && !opciones.add">
             <h2>{{nombreUniversidad}}</h2>
             <p>{{nombreCarrera}}</p>
             <p>{{fechaInicio}}-{{fechaFin}}</p>
-            <p>historial academico <a [href]="historialAcademico">aqui</a></p>
+            <p>historial academico: <a [href]="historialAcademico" target="_blank">aqui</a></p>
             <button *ngIf="!opciones.edit && opciones.admin" (click)="mostrar('universidad')" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
             <div *ngIf="opciones.mostrar && id =='universidad'">
                 <button *ngIf="!opciones.edit" (click)="botonEdit('universidad')" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
@@ -25,8 +22,8 @@
         <div *ngFor="let element of cursos;let indice=index" class="m-0 p-0">
             <div *ngIf="!opciones.edit && !opciones.add" class="second col-12 margen-2 p-3 position-relative"  id="indice">
                 <h3>{{element.nombreCurso}}</h3>
-                <p>Acceder al certificado del curso<a [href]="element.urlCertificado">Aqui</a></p>
-                <p>Acceder al contenido del curso<a [href]="element.urlContenido">Aqui</a></p>
+                <p>Acceder al certificado del curso: <a [href]="element.urlCertificado" target="_blank">Aqui</a></p>
+                <p>Acceder al contenido del curso: <a [href]="element.urlContenido" target="_blank">Aqui</a></p>
                 <button *ngIf="!opciones.edit && opciones.admin" (click)="mostrar('cursos'+indice)" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
                 <div *ngIf="opciones.mostrar && id=='cursos'+indice">
                     <button *ngIf="!opciones.edit" (click)="edit('cursos'+indice)" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>

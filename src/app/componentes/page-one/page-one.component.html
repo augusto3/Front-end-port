@@ -1,12 +1,9 @@
-<app-head [titulo]="titulo" ></app-head>
-<app-barra></app-barra>
-
-<div class="container-fluid">
-    <div *ngIf="!opciones.edit" class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center second position-relative zi-4">
-        <h2 class="text-center col-12">{{nombre}}</h2>
-        <h3 class="text-center col-12" >{{edad}}</h3>
-        <img class="size col-3 m-0 p-0" [src]="urlFoto">
-        <p class="m-0 p-3 col-9">{{descripcion}}</p>
+<div class="container-fluid p-3 m-0">
+    <div *ngIf="!opciones.edit" class="d-flex row m-3 p-3 flex-wrap align-items-center justify-content-center align-content-center second position-relative all">
+        <h2 class="text-center col-11">{{nombre}}</h2>
+        <h3 class="text-center col-11" >{{edad}}</h3>
+        <img *ngIf="urlFoto" class="size col-4 m-2 p-3" [src]="urlFoto">
+        <p class=" p-2 col-8">{{descripcion}}</p>
         <button *ngIf="!opciones.edit && opciones.admin" (click)="opciones.botonOpciones()" class="edit p-0 m-2 second position-absolute ubicacion0"><i class="bi-three-dots-vertical"></i></button>
         <div *ngIf="opciones.mostrar">
             <button *ngIf="!opciones.edit" (click)="opciones.botonEdit()" class="edit second ubicacion1 p-0 m-2 position-absolute"><i class="bi bi-pencil"></i></button>
@@ -18,7 +15,7 @@
             <input formControlName="nombre" class="text-center second input-h2 m-2 p-2 col-12 " type="text" [placeholder]="nombre">
             <input formControlName="edad" class="text-center second input-h2 m-2 p-2 col-12 " type="text" [placeholder]="edad">
             <input formControlName="urlFoto" class="text-center second input-h2 m-2 p-2 col-12 " type="file"[placeholder]="urlFoto">
-            <textarea formControlName="descripcion" class="text-center second input-p m-2 p-2 col-12" name="" id="" cols="30" rows="10"[placeholder]="descripcion" ></textarea>
+            <textarea formControlName="descripcion" class="text-center second input-p m-2 p-2 col-12" cols="30" rows="10"[placeholder]="descripcion" ></textarea>
             <button (click)="opciones.botonEdit()" class="edit second ubicacion0 p-0 m-2 position-absolute"><i class="bi-arrow-left p-0 m-0"></i></button>
             <button type="submit" class=" position-absolute second edit p-0 m-2 ubicacion1"><i class="bi-check-lg"></i></button>
         </form>

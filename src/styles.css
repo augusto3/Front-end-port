@@ -1,54 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 html {
     height: 100%;
+    width: 100%;
 }
-.body-normal {
-    background: radial-gradient(ellipse, aquamarine, aquamarine,aqua, aqua, blue);
+.body{
+    background: radial-gradient(ellipse, rgb(0, 174, 255),  rgb(0, 174, 255), blue);
     color: black;
-    min-height: 100%;
     background-attachment: fixed;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.head-dark{
-    background: linear-gradient(to right, black, gray, black);
-    border: 3px solid black;
-}
-.menu-dark{
-    background: linear-gradient(black,gray,black);
-    border: 3px solid black;
-    width: 50px;
-    height: 100%;
+    scrollbar-width: 12px;
+    scrollbar-color: rgb(6, 0, 92) rgb(2, 74, 231);
 }
 .second{
-    background-color: rgba(0, 0, 255, 0.3);
+    background-color: rgba(0, 89, 255, 0.5);
     border-radius: 20px;
 }
-.head-light{
-    background: linear-gradient(to right, blue, rgb(0, 255, 255), blue);
+.menu{
+    background: linear-gradient(blue, rgb(0, 174, 255),blue);
     border: 3px solid blue;
-}
-.menu-light{
-    background: linear-gradient(blue,aqua,blue);
-    border: 3px solid blue;
-    width: 50px;
     height: 100%;
-}
-.dark{
-    background: radial-gradient(ellipse, lightgray,lightgray,gray, gray, black);
-    color: white;
-}
-.dark-second{
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    width: 60px;
+    padding: 7px;
 }
 h1 {
-    text-shadow:6px 6px 13px rgba(0,0,0,0.9);
-    font-family: Roboto, sans-serif;
+    font-size: 40px;
+    font-family: "Montserrat", serif;
 }
-.container-fluid {
-    padding-left: 50px;
+h2, h3{
+    font-family: 'Times New Roman', Times, serif;
+}
+p{
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 h2 .input-h2{
     width: auto;
@@ -92,10 +77,6 @@ input::placeholder, textarea::placeholder{
     background-color: rgba(0, 0, 255, 0.5);
     border-radius: 20px;    
 }
-i {
-    font-size: 30px;
-    color: black;
-}
 button>i{
     font-size: 15px;
     color: black;
@@ -103,8 +84,4 @@ button>i{
 button:hover{
     background-color: rgba(0, 0, 255, 0.5);
     border-radius: 20px;    
-}
-i.dark{
-    font-size: 30px;
-    color: white;
 }

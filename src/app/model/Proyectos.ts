@@ -1,6 +1,7 @@
 export interface Proyectos {
-    nombreProyecto:string;
-    urlProyectos:string;
-    descripcion:string;
-  }
-  
+  nombreProyecto:string;
+  urlProyectos:string;
+  urlFoto:string;
+  urlPagina:string;
+  descripcion:string;
+}

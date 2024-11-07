@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { funcion} from '../../servicios/function';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { Experiencia } from 'src/app/model/Experiencia';
@@ -8,10 +8,10 @@ import { FirebaseRDService } from 'src/app/servicios/firebase.rd.service';
   templateUrl: './page-two.component.html',
   styleUrls: ['./page-two.component.css']
 })
-export class PageTwoComponent{
+export class PageTwoComponent implements OnInit{
   public opciones=new funcion;
   public titulo:string="Experiencia";
-  public experiencia:Experiencia;
+  public experiencia!:Experiencia;
   public formCarga!:FormGroup;
   public nombreEmpresa:string="";
   public puestoTrabajo:string="";
@@ -20,9 +20,16 @@ export class PageTwoComponent{
   public descripcion:string="";
   constructor(private formBuilder :FormBuilder,private fire:FirebaseRDService){
     this.buildForms();
-    this.fire.getDatos('experiencia','experiencia');
-    this.experiencia=this.opciones.getDatos('experiencia');
-    this.inicializar()
+  }
+  ngOnInit(){
+    this.fire.getDatos('experiencia')
+    .then((snapshot) => {
+      this.experiencia=snapshot.val()
+      this.inicializar();
+    })
+    .catch((error) => {
+      console.error(error.code+'|'+error.message);
+    });
   }
   inicializar(){
     if(this.experiencia!=undefined){

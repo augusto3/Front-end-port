@@ -1,9 +1,6 @@
-<app-head [titulo]="titulo"></app-head>
-<app-barra></app-barra>
-
-<div class="container-fluid">
-    <div class="d-flex row p-3 m-3 flex-wrap align-items-center justify-content-center align-content-center">
-        <div *ngIf="!opciones.edit && !opciones.add" class="position-relative second col-12 m-2 p-2">
+<div class="container-fluid p-3 m-0">
+    <div class="d-flex row p-3 m-3 flex-wrap align-items-center justify-content-center align-content-center second">
+        <div *ngIf="!opciones.edit && !opciones.add" class="position-relative col-12 p-0 m-0">
             <h2>{{nombreEmpresa}}</h2>
             <h3>{{puestoTrabajo}}</h3>
 <!--                <h3>{{fechaInicio}}-{{fechaFin}}</h3>-->

@@ -1,13 +1,32 @@
 span{
-    display: none;
-    left: 40px;
-    background-color:rgb(0, 255, 255);
-    color: black;
-    transform: translateY(-40px);
+    left: 55px;
+    background-color:rgb(0, 184, 255);
+    transform: translateY(-32px);
 }
 a:hover + span{
-    display: block;
+    display: block!important;
 }
 .zi-10{
     z-index: 10;
+}
+i:not(i.active){
+    color: black;
+    width: 32px;
+    height: 32px;
+    font-size: 26px;
+}
+i.active{
+    color: white;
+    width: 32px;
+    height: 32px;
+    font-size: 26px;
+}
+.contenedor{
+    margin-top: 10px;
+}
+.contenedor:hover:not(.contenedor.active){
+    background-color:rgb(0, 174, 255);
+}
+.contenedor.active{
+    background-color:rgb(0, 0, 68);
 }

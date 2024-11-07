@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { funcion } from '../../servicios/function';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Universidad } from 'src/app/model/Universidad';
@@ -25,13 +25,24 @@ export class PageThreeComponent implements OnInit{
   public formCurso!:FormGroup;
   constructor(private formBuilder :FormBuilder,private fire:FirebaseRDService){
     this.buildForms();
-    this.fire.getDatos('universidad','universidad');
-    this.universidad=this.opciones.getDatos('universidad');
-    this.fire.getDatos('curso','curso');
-    this.cursos=this.opciones.getDatos('curso');
   }
-  ngOnInit():void {
-    this.inicializar();
+  ngOnInit(): void {
+    this.fire.getDatos('universidad')
+    .then((snapshot) => {
+      this.universidad=snapshot.val()
+      this.inicializar();
+    })
+    .catch((error) => {
+      console.error(error.code+'|'+error.message);
+    });
+
+    this.fire.getDatos('curso')
+    .then((snapshot) => {
+      this.cursos=snapshot.val()
+    })
+    .catch((error) => {
+      console.error(error.code+'|'+error.message);
+    });
   }
   inicializar(){
     if(this.universidad!=null){

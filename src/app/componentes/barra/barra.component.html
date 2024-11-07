@@ -1,50 +1,44 @@
-<div class="menu-light position-fixed bottom-0 top-0 menu p-0 text-center zi-10">
-    <div class="d-inline-block">
-        <a routerLink="/sobremi">
-            <i class="bi bi-person-circle"></i>
+<div class="menu position-fixed bottom-0 top-0 text-center zi-10">
+    <div [ngClass]="{'active': titulo == 'sobre mi'}" class="d-inline-block contenedor rounded-circle">
+        <a href="#sobremi">
+            <i [ngClass]="{'active': titulo == 'sobre mi'}" class="bi bi-person-circle p-2"></i>
         </a>
-        <span class="zi-10 position-absolute rounded p-1">Sobre mi</span>
+        <span class="position-absolute rounded p-1 d-none text-dark">Sobre mi</span>
     </div>
     <br>
-    <div class="d-inline-block">
-        <a routerLink="/experiencia">
-            <i class="bi bi-file-earmark-text"></i>
+    <div [ngClass]="{'active': titulo == 'experiencia'}" class="d-inline-block contenedor rounded-circle">
+        <a href="#experiencia">
+            <i [ngClass]="{'active': titulo == 'experiencia'}" class="bi bi-file-earmark-text p-2"></i>
         </a>
-        <span class="position-absolute rounded p-1">experiencia</span>
+        <span class="position-absolute rounded p-1 d-none text-dark">experiencia</span>
     </div>
     <br>
-    <div class="d-inline-block">
-        <a routerLink="/educacion">
-            <i class="bi bi-mortarboard"></i>
+    <div [ngClass]="{'active': titulo == 'educacion'}" class="d-inline-block contenedor rounded-circle">
+        <a href="#educacion">
+            <i [ngClass]="{'active': titulo == 'educacion'}" class="bi bi-mortarboard p-2"></i>
         </a>
-        <span class="position-absolute rounded p-1">educacion</span>
+        <span class="position-absolute rounded p-1 d-none text-dark">educacion</span>
     </div>
     <br>
-    <div class="d-inline-block">
-        <a routerLink="/habilidades">
-            <i class="bi bi-lightbulb"></i>
+    <div [ngClass]="{'active': titulo == 'habilidades'}" class="d-inline-block contenedor rounded-circle">
+        <a href="#habilidades">
+            <i [ngClass]="{'active': titulo == 'habilidades'}" class="bi bi-lightbulb p-2"></i>
         </a>
-        <span class="position-absolute rounded p-1">habilidades</span>
+        <span class="position-absolute rounded p-1 d-none text-dark">habilidades</span>
     </div>
     <br>
-    <div class="d-inline-block">
-        <a routerLink="/proyectos">
-            <i class="bi bi-github"></i>
+    <div [ngClass]="{'active': titulo == 'proyectos'}" class="d-inline-block contenedor rounded-circle">
+        <a href="#proyectos">
+            <i [ngClass]="{'active': titulo == 'proyectos'}"class="bi bi-clipboard-data p-2"></i>
         </a>
-        <span class="position-absolute rounded p-1">proyectos</span>
+        <span class="position-absolute rounded p-1 d-none text-dark">proyectos</span>
     </div>
     <br>
-    <div class="d-inline-block">
-        <a routerLink="/contactame">
-            <i class="bi bi-envelope-open"></i>
-        </a>
-        <span class="position-absolute rounded p-1">contactame</span>
-    </div>
-    <br>
-    <div class="bottom-0 position-absolute ">
-        <a [href]="facebook" target="_blank"><i class="bi bi-facebook"></i></a><br>
-        <a [href]="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a><br>
-        <a [href]="instagram" target="_blank"><i class="bi bi-instagram"></i></a><br>
+    <div class="position-absolute p-2 m-1" style="bottom: 0px; left: 0px;">
+        <a [href]="github" target="_blank"> <i class="bi bi-github"></i></a>
+        <a [href]="facebook" target="_blank" ><i class="bi bi-facebook"></i></a>
+        <a [href]="linkedin" target="_blank" ><i class="bi bi-linkedin"></i></a>
+        <a [href]="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
     </div>
     <br>
 </div>
